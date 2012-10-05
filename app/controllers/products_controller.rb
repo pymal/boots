@@ -21,6 +21,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def showByName
+    @product = Product.find(:first, :conditions => ["name LIKE ?", "#{params[:name]}"])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @product }
+    end
+  end
+
   # GET /products/new
   # GET /products/new.json
   def new
